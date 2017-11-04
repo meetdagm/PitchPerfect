@@ -1,5 +1,5 @@
 //
-//  MainView.swift
+//  RecordView.swift
 //  PitchPerfect
 //
 //  Created by Dagmawi Nadew-Assefa on 11/3/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainView: UIView {
+class RecordView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
