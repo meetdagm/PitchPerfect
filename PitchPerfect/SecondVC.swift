@@ -11,11 +11,17 @@ import UIKit
 class SecondVC: UIViewController {
 
     let secondView = SecondView()
+    var audioRecordedURL: URL!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print(audioRecordedURL)
     }
 
     override func loadView() {

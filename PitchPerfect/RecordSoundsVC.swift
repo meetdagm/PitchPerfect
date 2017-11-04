@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class RecordSoundsVC: UIViewController {
+class RecordSoundsVC: UIViewController, AVAudioRecorderDelegate {
     
     let mainView = RecordView()
     let secondVC = SecondVC()
@@ -56,6 +56,7 @@ class RecordSoundsVC: UIViewController {
         try! session.setCategory(AVAudioSessionCategoryPlayAndRecord, with:AVAudioSessionCategoryOptions.defaultToSpeaker)
         
         try! audioRecorder = AVAudioRecorder(url: filePath!, settings: [:])
+        audioRecorder.delegate = self
         audioRecorder.isMeteringEnabled = true
         audioRecorder.prepareToRecord()
         audioRecorder.record()
@@ -66,14 +67,22 @@ class RecordSoundsVC: UIViewController {
         mainView.stpRecordButton.isEnabled = false
         mainView.recordButton.isEnabled = true
         mainView.placeholderText.text = "Tap to Record."
-        navigationController?.pushViewController(secondVC, animated: true)
         audioRecorder.stop()
         let audioSession = AVAudioSession.sharedInstance()
         try! audioSession.setActive(false)
         
     }
     
-    
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        
+        if flag{
+            secondVC.audioRecordedURL = audioRecorder.url
+            navigationController?.pushViewController(secondVC, animated: true)
+        }else{
+            print("Error recording sound")
+        }
+        
+    }
 
 }
 
