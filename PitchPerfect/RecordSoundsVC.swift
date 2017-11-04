@@ -12,7 +12,7 @@ import AVFoundation
 class RecordSoundsVC: UIViewController, AVAudioRecorderDelegate {
     
     let mainView = RecordView()
-    let secondVC = SecondVC()
+    let secondVC = PlaySoundVC()
     var audioRecorder: AVAudioRecorder!
     
 
@@ -76,7 +76,7 @@ class RecordSoundsVC: UIViewController, AVAudioRecorderDelegate {
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         
         if flag{
-            secondVC.audioRecordedURL = audioRecorder.url
+            secondVC.recordedAudioURL = audioRecorder.url
             navigationController?.pushViewController(secondVC, animated: true)
         }else{
             print("Error recording sound")
